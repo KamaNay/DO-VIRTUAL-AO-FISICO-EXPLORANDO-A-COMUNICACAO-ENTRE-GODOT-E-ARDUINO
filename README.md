@@ -26,7 +26,6 @@ Este projeto transforma um **ESP32-S3 (com tela redonda GC9A01)** em um volante 
 
 * `/arduino`: Código fonte `.ino` para a placa ESP32.
 * `/godot_script`: Script GDScript para o veículo no Godot 4.
-* `/assets`: Imagens e esquemáticos (opcional).
 
 ## 🔧 Configuração Rápida
 
