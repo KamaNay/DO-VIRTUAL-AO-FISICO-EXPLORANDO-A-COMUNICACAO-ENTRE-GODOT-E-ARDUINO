@@ -30,14 +30,15 @@ Este projeto transforma um **ESP32-S3 (com tela redonda GC9A01)** em um volante 
 ## 🔧 Configuração Rápida
 
 ### 1. Arduino IDE
-1. Instale as bibliotecas: `GFX_Library_for_Arduino`, `WiFi`, `WiFiUdp` e a biblioteca específica para o sensor `QMI8658`.
-2. No arquivo `.ino`, atualize as credenciais de rede:
+1. Instale o Pacote da Placa `esp32` (2.0.11) da Espressif Systems.
+2. Instale as bibliotecas: `GFX_Library_for_Arduino` (1.4.2) da Moon On Our Nation e a biblioteca específica para o sensor `QMI8658`.
+3. No arquivo `.ino`, atualize as credenciais de rede:
    ```cpp
    const char* ssid = "NOME_DO_WIFI";
    const char* password = "SENHA";
    const char* pc_ip = "192.168.15.X"; // IP do seu PC rodando o Godot
 
-3. Faça o upload para a placa.
+4. Faça o upload para a placa.
 
 ### 2. Godot 4
 1. Adicione o script fornecido ao seu nó VehicleBody3D ou RigidBody3D.
