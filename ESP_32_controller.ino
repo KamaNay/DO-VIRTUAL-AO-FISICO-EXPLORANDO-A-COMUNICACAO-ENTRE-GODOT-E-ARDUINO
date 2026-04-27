@@ -180,7 +180,7 @@ void loop() {
   QMI8658_Data data;
   if (imu.readSensorData(data)) {
     // Converte de mili-G para G (1G = gravidade terrestre)
-    float accY = -(data.accelY / 1000.0); 
+    float accY = -(data.accelZ / 1000.0); 
     float accX = -(data.accelX / 1000.0); 
 
     // Empacota e envia para o PC ("Y,X")
