@@ -37,6 +37,10 @@ Arduino_GFX *tft = new Arduino_GC9A01(bus, 12, 0, true); // GC9A01 é o chip da 
 WiFiUDP udp;  // Cria o objeto para comunicação via rede (rápida e sem atrasos)
 QMI8658 imu;  // Cria o objeto do sensor de movimento (Acelerômetro/Giroscópio)
 
+// --- VARIÁVEIS DE CONTROLE DE REDE ---
+unsigned long ultimoTempoEnvio = 0;
+const int INTERVALO_ENVIO = 20; // 20 milissegundos = 50 envios por segundo
+
 // --- VARIÁVEIS GLOBAIS ---
 unsigned long ultimoTempoTela = 0; // Controla a taxa de atualização da bateria
 float voltagemSuavizada = 0;       // Evita que a bateria fique "piscando" entre números
@@ -184,9 +188,14 @@ void loop() {
     float accX = -(data.accelX / 1000.0); 
 
     // Empacota e envia para o PC ("Y,X")
-    udp.beginPacket(pc_ip, udp_port);
-    udp.print(String(accY) + "," + String(accX));
-    udp.endPacket();
+    unsigned long tempoAtualEnvio = millis();
+    if (tempoAtualEnvio - ultimoTempoEnvio >= INTERVALO_ENVIO) {
+      ultimoTempoEnvio = tempoAtualEnvio;
+      
+      udp.beginPacket(pc_ip, udp_port);
+      udp.print(String(accY) + "," + String(accX));
+      udp.endPacket();
+    }
 
     // Lógica da Animação do Volante
     float inclinaX = constrain(accX, -1.0, 1.0); // Trava o valor entre -1 e 1
